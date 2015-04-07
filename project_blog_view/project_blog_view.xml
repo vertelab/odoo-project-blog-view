@@ -7,6 +7,7 @@
 
 
 <t t-call="website.layout">
+    
     <div id="wrap" class="oe_structure oe_empty">
       <div class="carousel slide mb32" id="myCarousel0" style="height: 320px;">
         <ol class="carousel-indicators hidden">
@@ -72,10 +73,7 @@
       <section class="para_large">
         <div class="container">
           <div class="row">
-            
-             <div><t t-raw="self.get_posts('elevhalsa',year)"/></div>
-             <div><t t-raw="self.get_projects('elevhalsa',year)"/></div>
-            
+                        
             <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
                 
                 <t t-raw="post.content" />
@@ -84,7 +82,7 @@
         
             <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
                 <span><t t-esc="project.name"/></span>
-                <t t-foreach="project.issues_ids" t-as="issue">
+                <t t-foreach="project.issue_ids" t-as="issue">
                     <div><t t-esc="issue.name"/></div>
                 </t>
             </t>
@@ -106,6 +104,41 @@
         
 </template>
 
+   
+<template id="layout_menu_hide" inherit_id="website.layout" customize_show="True" name="Hide Menu">
+    <xpath expr="//header" position="replace">
+        <div />
+        <header>
+         <a class="navbar-brand" href="/" t-field="res_company.name"/>
+
+        </header>
+    </xpath>
+</template>
+
+
+    <record id="edit_project" model="ir.ui.view">
+            <field name="name">project_blog_view.project.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                     <newline/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                </field>                
+            </field>
+   </record>              
+ 
+ 
+     <record id="view_blog_post_form" model="ir.ui.view">
+            <field name="name">project_blog_view.blog_post_form.inherit</field>
+            <field name="model">blog.post</field>
+            <field name="inherit_id" ref="website_blog.view_blog_post_form"/>
+            <field name="arch" type="xml">
+                <field name="visits" position="after">
+                    <field name="content" />
+                </field>                
+            </field>
+   </record>    
 
 </data>
 </openerp>

@@ -22,17 +22,14 @@ class website_project(http.Controller):
 
     # get blog posts where both year and tag (string) matches
     def get_posts(self,tag,year):
-        #tag_obj = request.env['blog.tag'].search([('name','=',tag)])[0]
-        #posts = tag_obj.post_ids
-        #return posts
-        #[0].post_ids.filtered(lambda p: year.id in [y.id for y in p.tag_ids] )
         return request.env['blog.tag'].search([('name','=',tag)])[0].post_ids.filtered(lambda p: year.id in [y.id for y in p.tag_ids] )
-
+        # use foreach get_posts('elevhalsa',year) as post
+    
     # get project and indirect issues where both year and tag (string) matches
     def get_projects(self,tag,year):
-        tag_id = request.env['blog.tag'].search([('name','=',tag)])[0].id
-        return request.env['project.project'].search(['&',('tag_ids','in',year.id),('tag_ids','in',tag_id)])
-        # use foreach get_projects(year,'elevhalsa') as project, foreach project.issue_ids as issue
+        #tag_id = request.env['blog.tag'].search([('name','=',tag)])[0].id
+        return request.env['project.project'].search(['&',('tag_ids','in',year.id),('tag_ids','in',request.env['blog.tag'].search([('name','=',tag)])[0].id)])
+        # use foreach get_projects('elevhalsa',year) as project, foreach project.issue_ids as issue
 
 
 
@@ -51,10 +48,9 @@ class website_project(http.Controller):
         
         
 class project_project(models.Model):
-    _name = "project.project"
+    _inherit = "project.project"
 
-    tag_ids   = fields.Many2many(comodel_name='blogs.tag',string="Tags")
-   
-
+    tag_ids   = fields.Many2many('blog.tag',string="Tags")
+    
 
 # vim:expandtab:tabstop=4:softtabstop=4:shiftwidth=4:

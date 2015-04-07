@@ -35,7 +35,7 @@ Sponsor:
 Martinskolan
 
     """,
-    'depends': ['base', 'project_issue','website_blog'],
+    'depends': ['base', 'project','project_issue','website_blog'],
     'data': [ 'project_blog_view.xml'
         ],
     'installable': True,
