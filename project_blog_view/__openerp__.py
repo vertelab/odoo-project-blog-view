@@ -29,7 +29,7 @@
     'description': """
 Report using content from blogs and projects
 
-http: /rapport/<blog>/year/<blog tag for year>
+http: /rapport/<year>
 
 Sponsor:
 Martinskolan

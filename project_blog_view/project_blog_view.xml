@@ -18,79 +18,164 @@
             <div class="container">
               <div class="row content">
                 <div class="carousel-content col-sm-12 mt16 col-md-10">
-                  <h2 style="text-align: center;">MARTINSKOLANS </h2>
-                  <h2 style="text-align: center;">SYSTEMATISKA</h2>
-                  <h2 style="text-align: center;"> KVALITETSARBETE</h2>
+                  <h1 style="text-align: center;">Martinskolans systematiska Kvalitetsarbete </h1>
                 </div>
                 <div class="carousel-img col-md-6 hidden-sm hidden-xs"/>
               </div>
             </div>
           </div>
         </div>
-        <div class="carousel-control left hidden" data-slide="prev" data-target="#myCarousel0" href="#myCarousel0" style="width: 10%">
-          <i class="fa fa-chevron-left"/>
-        </div>
-        <div class="carousel-control right hidden" data-slide="next" data-target="#myCarousel0" href="#myCarousel0" style="width: 10%">
-          <i class="fa fa-chevron-right"/>
-        </div>
       </div>
-      <section class="oe_dark mt16 mb16">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center mt32 mb32">
-              <div data-canvas-width="112.38642666666665" style="left: 427.691px; top: 927.994px; font-size: 33.2px; font-family: sans-serif; transform: scaleX(0.645899);">ÅR  2015</div>
-              <div data-canvas-width="255.6565999999999" style="left: 356.752px; top: 988.394px; font-size: 33.2px; font-family: sans-serif; transform: scaleX(0.767738);">JANUARIRAPPORT</div>
-            </div>
-          </div>
-        </div>
-      </section>
+
+<!--      Start Section Allämnt-->
       <section class="para_large">
         <div class="container">
           <div class="row">
-            <div class="col-md-12 mb16 mt16">
-              <div class="o_image_floating o_margin_l pull-right">
-                <div class="o_container">
-                  <img alt="Odoo Members" class="img img-rounded img-responsive" src="/website/static/src/img/odoo.jpg"/>
-                  <mark class="text-center">
-                    <a href="#">
-                      <strong>Click Here</strong>
-                    </a>
-                  </mark>
-                </div>
-                <div class="o_footer">
-                  <small class="text-muted">A great way to catch your reader's attention is to tell a story. Everything you consider writing can be told as a story.</small>
-                </div>
-              </div>
-              <h2>MARTINSKOLANS SYSTEMATISKA KVALITETSARBETE JANUARI 2</h2>
-              <p>Det systematiska kvalitetsarbetet bygger på en kontinuerlig analys av verksamheten. Ett centralt forum för detta är kolle giets och arbetslagens möten varje torsdag, men även studiedagar där all pedagogisk personal deltar. Vid kollegiets arbetslagsmöten diskuteras aktuella händelser, elevers och klassers utveckling och resultat och gemensamma aktiviteter. Rektor deltar som re gel i arbetslagens möten</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      
-      
-      <section class="para_large">
-        <div class="container">
-          <div class="row">
-                        
-            <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
-                
+
+        <h1>1 Allmänt</h1>
+         <t t-foreach="self.get_posts('allmant',year)" t-as="post">
                 <t t-raw="post.content" />
+         </t>
         
-            </t>
-        
-            <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
-                <span><t t-esc="project.name"/></span>
+            <t t-foreach="self.get_projects('allmant',year)" t-as="project">
+                <span><h2><t t-esc="project.name"/></h2></span>
+				<table>
+                    <tr>
+                    <th></th>
+                    <th>Åtgärd</th>
+                    <th>Ansvarig</th>
+                    <th>Kontroll</th></tr>
                 <t t-foreach="project.issue_ids" t-as="issue">
-                    <div><t t-esc="issue.name"/></div>
+                    <tr>
+                    <td><t t-esc="issue.name"/></td>
+                    <td><t t-esc="issue.description"/></td>
+                    <td>
+<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"></br></t>-->
+                    <t t-esc="issue.user_id.name"/></td>
+                    <td><t t-esc="issue.version_id.name"/></td>
+                    </tr>
                 </t>
+				</table>
             </t>
             
           </div>
         </div>
       </section>
+<!--      End Section Allämnt-->   
+
+
+
+<!--      Start Section Regelverk-->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+        <h1>3 Elevhälsa</h1>
+         <t t-foreach="self.get_posts('regelverk',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+        
+            <t t-foreach="self.get_projects('regelverk',year)" t-as="project">
+                <span><h2><t t-esc="project.name"/></h2></span>
+				<table>
+                    <tr>
+                    <th></th>
+                    <th>Åtgärd</th>
+                    <th>Ansvarig</th>
+                    <th>Kontroll</th></tr>
+                <t t-foreach="project.issue_ids" t-as="issue">
+                    <tr>
+                    <td><t t-esc="issue.name"/></td>
+                    <td><t t-esc="issue.description"/></td>
+                    <td>
+<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
+                    <t t-esc="issue.user_id.name"/></td>
+                    <td><t t-esc="issue.version_id.name"/></td>
+                    </tr>
+                </t>
+				</table>
+            </t>
+            
+          </div>
+        </div>
+      </section>
+<!--      End Section Regelverk-->   
+
       
+      
+  
+<!--      Start Section Vision-->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+        <h1>3 Elevhälsa</h1>
+         <t t-foreach="self.get_posts('vision',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+        
+            <t t-foreach="self.get_projects('vision',year)" t-as="project">
+                <span><h2><t t-esc="project.name"/></h2></span>
+				<table>
+                    <tr>
+                    <th></th>
+                    <th>Åtgärd</th>
+                    <th>Ansvarig</th>
+                    <th>Kontroll</th></tr>
+                <t t-foreach="project.issue_ids" t-as="issue">
+                    <tr>
+                    <td><t t-esc="issue.name"/></td>
+                    <td><t t-esc="issue.description"/></td>
+                    <td>
+<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
+                    <t t-esc="issue.user_id.name"/></td>
+                    <td><t t-esc="issue.version_id.name"/></td>
+                    </tr>
+                </t>
+				</table>
+            </t>
+            
+          </div>
+        </div>
+      </section>
+<!--      End Section Elevhälsa-->   
+
+      
+<!--      Start Section Elevhälsa-->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+        <h1>3 Elevhälsa</h1>
+         <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+        
+            <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
+                <span><h2><t t-esc="project.name"/></h2></span>
+				<table>
+                    <tr>
+                    <th></th>
+                    <th>Åtgärd</th>
+                    <th>Ansvarig</th>
+                    <th>Kontroll</th></tr>
+                <t t-foreach="project.issue_ids" t-as="issue">
+                    <tr>
+                    <td><t t-esc="issue.name"/></td>
+                    <td><t t-esc="issue.description"/></td>
+                    <td>
+<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
+                    <t t-esc="issue.user_id.name"/></td>
+                    <td><t t-esc="issue.version_id.name"/></td>
+                    </tr>
+                </t>
+				</table>
+            </t>
+            
+          </div>
+        </div>
+      </section>
+<!--      End Section Elevhälsa-->      
 
       
       
@@ -110,7 +195,46 @@
         <div />
         <header>
          <a class="navbar-brand" href="/" t-field="res_company.name"/>
-
+         <li class="divider" t-ignore="true" t-if="website.user_id != user_id"/>
+         <ul class="nav navbar-nav navbar-right" id="top_menu"/>
+<!--
+        
+                    <div class="navbar navbar-default navbar-static-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-top-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"/>
+                                    <span class="icon-bar"/>
+                                    <span class="icon-bar"/>
+                                </button>
+                                <a class="navbar-brand" href="/" t-field="res_company.name"/>
+                            </div>
+                            <div class="collapse navbar-collapse navbar-top-collapse">
+                                <ul class="nav navbar-nav navbar-right" id="top_menu">
+                                    <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                        <t t-call="website.submenu"/>
+                                    </t>
+                                    <li class="divider" t-ignore="true" t-if="website.user_id != user_id"/>
+                                    <li class="dropdown" t-ignore="true" t-if="website.user_id != user_id">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <b>
+                                                <span t-esc="user_id.name"/>
+                                                <span class="caret"/>
+                                            </b>
+                                        </a>
+                                        <ul class="dropdown-menu js_usermenu" role="menu">
+                                            <li><a href="/web" role="menuitem">My Account</a></li>
+                                            <li class="divider"/>
+                                            <li><a t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+-->
+          
         </header>
     </xpath>
 </template>
@@ -139,6 +263,43 @@
                 </field>                
             </field>
    </record>    
+
+
+
+         <record id="view_blog_post_list" model="ir.ui.view">
+            <field name="name">blog.post.tree</field>
+            <field name="model">blog.post</field>
+            <field name= "inherit_id" ref="website_blog.view_blog_post_list"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="sequence" widget="handle" />
+                </field>
+            </field>
+        </record>
+
+         <record id="view_blog_post_form" model="ir.ui.view">
+            <field name="name">blog.post.form</field>
+            <field name="model">blog.post</field>
+            <field name= "inherit_id" ref="website_blog.view_blog_post_form"/>
+            <field name="arch" type="xml">
+                <field name="ranking" position="after">
+                    <field name="sequence"  />
+                    <field name="content" />
+                </field>
+            </field>
+        </record> 
+
+         <record id="view_blog_post_search" model="ir.ui.view">
+            <field name="name">blog.post.search</field>
+            <field name="model">blog.post</field>
+            <field name= "inherit_id" ref="website_blog.view_blog_post_search"/>
+            <field name="arch" type="xml">
+                <field name="blog_id" position="after">
+                    <field name="tag_ids" />
+                </field>
+            </field>
+        </record>         
+        
 
 </data>
 </openerp>

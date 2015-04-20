@@ -22,7 +22,7 @@ class website_project(http.Controller):
 
     # get blog posts where both year and tag (string) matches
     def get_posts(self,tag,year):
-        return request.env['blog.tag'].search([('name','=',tag)])[0].post_ids.filtered(lambda p: year.id in [y.id for y in p.tag_ids] )
+        return request.env['blog.tag'].search([('name','=',tag)])[0].post_ids.filtered(lambda p: year.id in [y.id for y in p.tag_ids] ).sorted(lambda p: p.sequence) 
         # use foreach get_posts('elevhalsa',year) as post
     
     # get project and indirect issues where both year and tag (string) matches
@@ -34,14 +34,14 @@ class website_project(http.Controller):
 
 
 
-    @http.route(['/rapport/<model("blog.blog"):blog>/year/<model("blog.tag"):year>',], type='http', auth="public", website=True)
+    @http.route(['/rapport/<string:year>',], type='http', auth="public", website=True)
     def rapport(self, year=False, blog=False, **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
 
-             
+        year_obj = request.env['blog.tag'].search([('name','=',year)])[0]
 
         return request.website.render("project_blog_view.rapport", {
-            'year': year,
+            'year': year_obj,
             'blog': blog,
             'self': self,
         })
@@ -50,7 +50,12 @@ class website_project(http.Controller):
 class project_project(models.Model):
     _inherit = "project.project"
 
-    tag_ids   = fields.Many2many('blog.tag',string="Tags")
+    tag_ids   = fields.Many2many('blog.tag',string="Blog Tags")
     
-
+class blog_post(models.Model):
+    _inherit = "blog.post"
+    
+    sequence = fields.Integer(default=50)
+    
+    
 # vim:expandtab:tabstop=4:softtabstop=4:shiftwidth=4:
