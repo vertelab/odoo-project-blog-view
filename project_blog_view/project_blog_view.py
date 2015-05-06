@@ -22,29 +22,50 @@ class website_project(http.Controller):
 
     # get blog posts where both year and tag (string) matches
     def get_posts(self,tag,year):
-        return request.env['blog.tag'].search([('name','=',tag)])[0].post_ids.filtered(lambda p: year.id in [y.id for y in p.tag_ids] ).sorted(lambda p: p.sequence) 
+        return request.env['blog.tag'].sudo().search([('name','=',tag)])[0].post_ids.filtered(lambda p: year.id in [y.id for y in p.tag_ids] ).sorted(lambda p: p.sequence) 
         # use foreach get_posts('elevhalsa',year) as post
     
     # get project and indirect issues where both year and tag (string) matches
     def get_projects(self,tag,year):
         #tag_id = request.env['blog.tag'].search([('name','=',tag)])[0].id
-        return request.env['project.project'].search(['&',('tag_ids','in',year.id),('tag_ids','in',request.env['blog.tag'].search([('name','=',tag)])[0].id)])
+        return request.env['project.project'].sudo().search(['&',('tag_ids','in',year.id),('tag_ids','in',request.env['blog.tag'].search([('name','=',tag)])[0].id)])
         # use foreach get_projects('elevhalsa',year) as project, foreach project.issue_ids as issue
 
 
 
-
     @http.route(['/rapport/<string:year>',], type='http', auth="public", website=True)
-    def rapport(self, year=False, blog=False, **post):
+    def rapport(self, year=False, **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
 
         year_obj = request.env['blog.tag'].search([('name','=',year)])[0]
 
         return request.website.render("project_blog_view.rapport", {
             'year': year_obj,
-            'blog': blog,
             'self': self,
         })
+
+    @http.route(['/rapport/ms/<string:year>',], type='http', auth="public", website=True)
+    def rapport_ms(self, year=False, **post):
+        cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
+
+        year_obj = request.env['blog.tag'].search([('name','=',year)])[0]
+
+        return request.website.render("project_blog_view.rapport_ms", {
+            'year': year_obj,
+            'self': self,
+        })
+
+    @http.route(['/rapport/mg/<string:year>',], type='http', auth="public", website=True)
+    def rapport_mg(self, year=False, **post):
+        cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
+
+        year_obj = request.env['blog.tag'].search([('name','=',year)])[0]
+
+        return request.website.render("project_blog_view.rapport_mg", {
+            'year': year_obj,
+            'self': self,
+        })
+        
         
         
 class project_project(models.Model):

@@ -21,7 +21,7 @@
 
 {
     'name': 'Report by blog and project',
-    'version': '1.0',
+    'version': '1.1',
     'author': 'Vertel AB',
     'category': 'knowledge',
     'website': 'http://www.vertel.se',
@@ -30,6 +30,8 @@
 Report using content from blogs and projects
 
 http: /rapport/<year>
+http: /rapport/mg/<year>
+http: /rapport/ms/<year>
 
 Sponsor:
 Martinskolan

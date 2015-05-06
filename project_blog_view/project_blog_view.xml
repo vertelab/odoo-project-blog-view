@@ -2,193 +2,993 @@
 <openerp>
 <data>
 
+<!--The report table-->
+<template name="Issue table" id="rapport_issue_table">
+
+                <t t-set="nbr_issues" t-value="len(project.issue_ids)" />
+				<table t-if="nbr_issues > 0"  class="table table-bordered" style="width:100%;border-style:none !important;margin-top:10px;margin-bottom:10px;"> 
+                    <tr>
+                    <th></th>
+                    <th>Åtgärd</th>
+                    <th>Ansvarig</th>
+                    <th>Kontroll</th></tr>
+
+                <t t-foreach="project.issue_ids" t-as="issue">
+                    <tr>
+                    <td style="min-width:25px;max-width:26px;"><t t-esc="issue.name"/></td>
+                    <td style="min-width:200px;max-width:206px;"><t t-esc="issue.description"/></td>
+                    <td style="min-width:61px;max-width:99px;">
+<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
+                    <t t-esc="issue.user_id.name"/></td>
+                    <td style="min-width:60px;max-width:100px;"><t t-esc="issue.version_id.name"/></td>
+                    </tr>
+                </t>
+				</table>
+		
+</template>
+
+
 <template name="Rapport" id="rapport">
 
 
-
-<t t-call="website.layout">
+	<t t-call="website.layout">
     
-    <div id="wrap" class="oe_structure oe_empty">
-      <div class="carousel slide mb32" id="myCarousel0" style="height: 320px;">
-        <ol class="carousel-indicators hidden">
-          <li class="active" data-slide-to="0" data-target="#myCarousel0"/>
-        </ol>
-        <div class="carousel-inner">
-          <div class="item oe_img_bg active" style="background-image: url(&quot;http://odooutv.vertel.se/website/image/ir.attachment/42_248f2b1/datas&quot;);">
-            <div class="container">
+   <div class="container">
               <div class="row content">
                 <div class="carousel-content col-sm-12 mt16 col-md-10">
-                  <h1 style="text-align: center;">Martinskolans systematiska Kvalitetsarbete </h1>
+                  <h1 style="text-align: center;">Stiftelsens systematiska Kvalitetsarbete 
+<!--         <t t-foreach="self.get_projects('allmant',year)" t-as="post">-->
+<!--                <t t-raw="project.client" />-->
+<!--                </t>-->
+                  
+                  </h1>
                 </div>
-                <div class="carousel-img col-md-6 hidden-sm hidden-xs"/>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-<!--      Start Section Allämnt-->
+
+
+<!--      Start Chapter Section -->
       <section class="para_large">
         <div class="container">
           <div class="row">
 
-        <h1>1 Allmänt</h1>
+<!--Header-->
+        <h1>1 ALLMÄNT OM VERKSAMHETEN
+<!--         <t t-foreach="self.get_projects('allmant',year)" t-as="post">-->
+<!--                <t t-raw="project.name" />-->
+<!--                </t>-->
+        </h1>
+
+<!--Blog-posts-->
          <t t-foreach="self.get_posts('allmant',year)" t-as="post">
                 <t t-raw="post.content" />
          </t>
-        
-            <t t-foreach="self.get_projects('allmant',year)" t-as="project">
-                <span><h2><t t-esc="project.name"/></h2></span>
-				<table>
-                    <tr>
-                    <th></th>
-                    <th>Åtgärd</th>
-                    <th>Ansvarig</th>
-                    <th>Kontroll</th></tr>
-                <t t-foreach="project.issue_ids" t-as="issue">
-                    <tr>
-                    <td><t t-esc="issue.name"/></td>
-                    <td><t t-esc="issue.description"/></td>
-                    <td>
-<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"></br></t>-->
-                    <t t-esc="issue.user_id.name"/></td>
-                    <td><t t-esc="issue.version_id.name"/></td>
-                    </tr>
-                </t>
-				</table>
-            </t>
-            
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('allmant',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
           </div>
         </div>
       </section>
-<!--      End Section Allämnt-->   
+<!--      End Chapter Section -->      
+      
 
 
-
-<!--      Start Section Regelverk-->
+<!--      Start Chapter Section -->
       <section class="para_large">
         <div class="container">
           <div class="row">
 
-        <h1>3 Elevhälsa</h1>
-         <t t-foreach="self.get_posts('regelverk',year)" t-as="post">
-                <t t-raw="post.content" />
-         </t>
-        
-            <t t-foreach="self.get_projects('regelverk',year)" t-as="project">
-                <span><h2><t t-esc="project.name"/></h2></span>
-				<table>
-                    <tr>
-                    <th></th>
-                    <th>Åtgärd</th>
-                    <th>Ansvarig</th>
-                    <th>Kontroll</th></tr>
-                <t t-foreach="project.issue_ids" t-as="issue">
-                    <tr>
-                    <td><t t-esc="issue.name"/></td>
-                    <td><t t-esc="issue.description"/></td>
-                    <td>
-<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
-                    <t t-esc="issue.user_id.name"/></td>
-                    <td><t t-esc="issue.version_id.name"/></td>
-                    </tr>
-                </t>
-				</table>
-            </t>
-            
-          </div>
-        </div>
-      </section>
-<!--      End Section Regelverk-->   
+<!--Header-->
+        <h1>2 VISION OCH MÅL FÖR SKOLANS VERKSAMHET</h1>
 
-      
-      
-  
-<!--      Start Section Vision-->
-      <section class="para_large">
-        <div class="container">
-          <div class="row">
-
-        <h1>3 Elevhälsa</h1>
+<!--Blog-posts-->
          <t t-foreach="self.get_posts('vision',year)" t-as="post">
                 <t t-raw="post.content" />
          </t>
-        
-            <t t-foreach="self.get_projects('vision',year)" t-as="project">
-                <span><h2><t t-esc="project.name"/></h2></span>
-				<table>
-                    <tr>
-                    <th></th>
-                    <th>Åtgärd</th>
-                    <th>Ansvarig</th>
-                    <th>Kontroll</th></tr>
-                <t t-foreach="project.issue_ids" t-as="issue">
-                    <tr>
-                    <td><t t-esc="issue.name"/></td>
-                    <td><t t-esc="issue.description"/></td>
-                    <td>
-<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
-                    <t t-esc="issue.user_id.name"/></td>
-                    <td><t t-esc="issue.version_id.name"/></td>
-                    </tr>
-                </t>
-				</table>
-            </t>
-            
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('vision',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
           </div>
         </div>
       </section>
-<!--      End Section Elevhälsa-->   
-
+<!--      End Chapter Section -->      
       
-<!--      Start Section Elevhälsa-->
+    
+     
+
+<!--      Start Chapter Section -->
       <section class="para_large">
         <div class="container">
           <div class="row">
 
-        <h1>3 Elevhälsa</h1>
-         <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
+<!--Header-->
+        <h1>3 REGELVERK, STYRDOKUMENT, KVALITET – OCH VÄRDEGRUNDSARBETE</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('regelverk',year)" t-as="post">
                 <t t-raw="post.content" />
          </t>
-        
-            <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
-                <span><h2><t t-esc="project.name"/></h2></span>
-				<table>
-                    <tr>
-                    <th></th>
-                    <th>Åtgärd</th>
-                    <th>Ansvarig</th>
-                    <th>Kontroll</th></tr>
-                <t t-foreach="project.issue_ids" t-as="issue">
-                    <tr>
-                    <td><t t-esc="issue.name"/></td>
-                    <td><t t-esc="issue.description"/></td>
-                    <td>
-<!--                    <t t-if="issue.project_id.partner_id" t-esc="issue.project_id.partner_id.name"/></br></t>-->
-                    <t t-esc="issue.user_id.name"/></td>
-                    <td><t t-esc="issue.version_id.name"/></td>
-                    </tr>
-                </t>
-				</table>
-            </t>
-            
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('regelverk',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
           </div>
         </div>
       </section>
-<!--      End Section Elevhälsa-->      
+<!--      End Chapter Section -->      
+       
 
-      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>4 ELEVHÄLSA, SÄRSKILT STÖD</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+       
+       
+       
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>5 SKOLANS ARBETE MOT DE NATIONELLA MÅLEN</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('nationella_mal',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('nationella_mal',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>6 UNDERVISNINGSRESURSER</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('undervisningsresurser',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('undervisningsresurser',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+                     
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>7 ORGANISATIONSUTVECKLING</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('organisationsutveckling',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('organisationsutveckling',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>8 FRITIDSHEMMEN</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('fritids',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('fritids',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>9 SAMARBETE HEM OCH SKOLA</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('hem_o_skola',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('hem_o_skola',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>10 RESULTATSAMMANSTÄLLNING OCH ANALYS</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('analys',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('analys',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>11 UTVECKLINGSOMRÅDEN NÄSTKOMMANDE LÄSÅR</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('utvecklingsomraden',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('utvecklingsomraden',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>12 SAMMANFATTNING</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('sammanfattning',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('sammanfattning',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+
       
     </div>
-    
-    
-    
   </t>
-        
-
-        
 </template>
 
+
+<template name="Rapport Martingården" id="rapport_mg">
+
+
+	<t t-call="website.layout">
+    
+   <div class="container">
+              <div class="row content">
+                <div class="carousel-content col-sm-12 mt16 col-md-10">
+                  <h1 style="text-align: center;">Martingårdens systematiska Kvalitetsarbete 2 
+<!--         <t t-foreach="self.get_projects('allmant',year)" t-as="post">-->
+<!--                <t t-raw="project.client" />-->
+<!--                </t>-->
+                  
+                  </h1>
+                </div>
+            </div>
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>1 ALLMÄNT OM VERKSAMHETEN
+<!--         <t t-foreach="self.get_projects('allmant',year)" t-as="post">-->
+<!--                <t t-raw="project.name" />-->
+<!--                </t>-->
+        </h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('allmant',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('allmant',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>2 VISION OCH MÅL FÖR SKOLANS VERKSAMHET</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('vision',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('vision',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+      
+    
+     
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>3 REGELVERK, STYRDOKUMENT, KVALITET – OCH VÄRDEGRUNDSARBETE</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('regelverk',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('regelverk',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+       
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>4 ELEVHÄLSA, SÄRSKILT STÖD</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+       
+       
+       
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>5 SKOLANS ARBETE MOT DE NATIONELLA MÅLEN</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('nationella_mal',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('nationella_mal',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>6 UNDERVISNINGSRESURSER</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('undervisningsresurser',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('undervisningsresurser',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+                     
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>7 ORGANISATIONSUTVECKLING</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('organisationsutveckling',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('organisationsutveckling',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>8 FRITIDSHEMMEN</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('fritids',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('fritids',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>9 SAMARBETE HEM OCH SKOLA</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('hem_o_skola',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('hem_o_skola',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>10 RESULTATSAMMANSTÄLLNING OCH ANALYS</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('analys',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('analys',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>11 UTVECKLINGSOMRÅDEN NÄSTKOMMANDE LÄSÅR</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('utvecklingsomraden',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('utvecklingsomraden',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>12 SAMMANFATTNING</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('sammanfattning',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('sammanfattning',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+
+      
+    </div>
+  </t>
+</template>
+
+ 
+
+<template name="Rapport Martinskolan" id="rapport_ms">
+
+
+	<t t-call="website.layout">
+    
+   <div class="container">
+              <div class="row content">
+                <div class="carousel-content col-sm-12 mt16 col-md-10">
+                  <h1 style="text-align: center;">Martinskolans systematiska Kvalitetsarbete 2 
+<!--         <t t-foreach="self.get_projects('allmant',year)" t-as="post">-->
+<!--                <t t-raw="project.client" />-->
+<!--                </t>-->
+                  
+                  </h1>
+                </div>
+            </div>
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>1 ALLMÄNT OM VERKSAMHETEN
+<!--         <t t-foreach="self.get_projects('allmant',year)" t-as="post">-->
+<!--                <t t-raw="project.name" />-->
+<!--                </t>-->
+        </h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('allmant',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('allmant',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>2 VISION OCH MÅL FÖR SKOLANS VERKSAMHET</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('vision',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('vision',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+      
+    
+     
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>3 REGELVERK, STYRDOKUMENT, KVALITET – OCH VÄRDEGRUNDSARBETE</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('regelverk',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('regelverk',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+       
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>4 ELEVHÄLSA, SÄRSKILT STÖD</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('elevhalsa',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('elevhalsa',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+       
+       
+       
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>5 SKOLANS ARBETE MOT DE NATIONELLA MÅLEN</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('nationella_mal',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('nationella_mal',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>6 UNDERVISNINGSRESURSER</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('undervisningsresurser',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('undervisningsresurser',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+                     
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>7 ORGANISATIONSUTVECKLING</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('organisationsutveckling',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('organisationsutveckling',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>8 FRITIDSHEMMEN</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('fritids',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('fritids',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>9 SAMARBETE HEM OCH SKOLA</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('hem_o_skola',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('hem_o_skola',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>10 RESULTATSAMMANSTÄLLNING OCH ANALYS</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('analys',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('analys',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>11 UTVECKLINGSOMRÅDEN NÄSTKOMMANDE LÄSÅR</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('utvecklingsomraden',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('utvecklingsomraden',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+<!--      Start Chapter Section -->
+      <section class="para_large">
+        <div class="container">
+          <div class="row">
+
+<!--Header-->
+        <h1>12 SAMMANFATTNING</h1>
+
+<!--Blog-posts-->
+         <t t-foreach="self.get_posts('sammanfattning',year)" t-as="post">
+                <t t-raw="post.content" />
+         </t>
+
+<!--Issue table-->
+	            <t t-foreach="self.get_projects('sammanfattning',year)" t-as="project">
+					<t t-call="project_blog_view.rapport_issue_table"/>
+				</t>
+          </div>
+        </div>
+      </section>
+<!--      End Chapter Section -->      
+
+
+
+
+
+      
+    </div>
+  </t>
+</template>
+
+  
    
 <template id="layout_menu_hide" inherit_id="website.layout" customize_show="True" name="Hide Menu">
     <xpath expr="//header" position="replace">
@@ -263,8 +1063,6 @@
                 </field>                
             </field>
    </record>    
-
-
 
          <record id="view_blog_post_list" model="ir.ui.view">
             <field name="name">blog.post.tree</field>
